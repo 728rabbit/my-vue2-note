@@ -216,3 +216,30 @@ var vm = new Vue({
 	})
 	</script>
 	
+16. Ajax(axios)
+    
+	axios.get('/user', {
+		params: {
+		  ID: 12345
+		}
+	  })
+	  .then(function (response) {
+		console.log(response);
+	  })
+	  .catch(function (error) {
+		console.log(error);
+	  });
+	
+	
+	执行多个并发请求
+	function getUserAccount() {
+	  return axios.get('/user/12345');
+	}
+	 
+	function getUserPermissions() {
+	  return axios.get('/user/12345/permissions');
+	}
+	axios.all([getUserAccount(), getUserPermissions()])
+	  .then(axios.spread(function (acct, perms) {
+		// 两个请求现在都执行完成
+	  }));
